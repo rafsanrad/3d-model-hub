@@ -1,5 +1,6 @@
 import { use } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import toast from "react-hot-toast";
 
 const AddModal = () => {
 
@@ -19,7 +20,7 @@ const AddModal = () => {
       created_by: user.email
     }
 
-    fetch('http://localhost:3000/models', {
+    fetch('https://3d-model-server.vercel.app/models', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,6 +29,7 @@ const AddModal = () => {
     })
     .then(res => res.json())
     .then(data=> {
+      toast.success("Successfully added!")
       console.log(data)
     })
     .catch(err => {
