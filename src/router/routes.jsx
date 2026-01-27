@@ -20,12 +20,12 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch('https://3d-model-server.vercel.app/latest-models')
+        loader: () => fetch('http://localhost:3000/latest-models')
       },
       {
         path: "/all-models",
         element: <AllModels />,
-        loader: () => fetch('https://3d-model-server.vercel.app/models')
+        loader: () => fetch('http://localhost:3000/models')
       },
       {
         path: "/profile",
@@ -77,7 +77,7 @@ export const router = createBrowserRouter([
             <UpdateModel />
           </PrivateRoute>
         ),
-          loader: ({params}) => fetch(`https://3d-model-server.vercel.app/models/${params.id}`)
+          loader: ({params}) => fetch(`http://localhost:3000/models/${params.id}`)
       },
       {
         path: "/auth/login",

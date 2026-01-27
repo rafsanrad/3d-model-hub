@@ -22,11 +22,6 @@ const AllModels = () => {
     })
   }
 
-
-
-  
-
-
   return (
     <div>
       <div className="text-2xl text-center font-bold"> All Models</div>
