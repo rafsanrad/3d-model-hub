@@ -10,10 +10,10 @@ const ModelDetails = () => {
   const [model, setModel] = useState({});
   const [loading, setLoading] = useState(true);
   const { user } = use(AuthContext);
-  const [refetch, setRefecth] = useState(false)
+  const [refetch, setRefecth] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/models/${id}`, {
+    fetch(`https://3d-models-hub-server-mu.vercel.app/models/${id}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },
@@ -21,7 +21,7 @@ const ModelDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         setModel(data.result);
-        console.log(" Api called!")
+        console.log(" Api called!");
         console.log(data);
         setLoading(false);
       });
@@ -38,12 +38,15 @@ const ModelDetails = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/models/${model._id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
+        fetch(
+          `https://3d-models-hub-server-mu.vercel.app/models/${model._id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
           },
-        })
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -73,7 +76,7 @@ const ModelDetails = () => {
       downloaded_by: user.email,
     };
 
-    fetch(`https://3d-model-server.vercel.app/downloads/${model._id}`, {
+    fetch(`https://3d-models-hub-server-mu.vercel.app/downloads/${model._id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -84,23 +87,22 @@ const ModelDetails = () => {
       .then((data) => {
         console.log(data);
         toast.success("Successfully downloaded!");
-        setRefecth(!refetch)
+        setRefecth(!refetch);
 
         // alternative solution of realtime download count update
 
-    //     fetch(`https://3d-model-server.vercel.app/models/${id}`, {
-    //   headers: {
-    //     authorization: `Bearer ${user.accessToken}`,
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setModel(data.result);
-    //     console.log(" Api called!")
-    //     console.log(data);
-    //     setLoading(false);
-    //   });
-
+        //     fetch(`https://3d-model-server.vercel.app/models/${id}`, {
+        //   headers: {
+        //     authorization: `Bearer ${user.accessToken}`,
+        //   },
+        // })
+        //   .then((res) => res.json())
+        //   .then((data) => {
+        //     setModel(data.result);
+        //     console.log(" Api called!")
+        //     console.log(data);
+        //     setLoading(false);
+        //   });
       })
       .catch((err) => {
         console.log(err);

@@ -11,18 +11,17 @@ import { AuthContext } from "../context/AuthContext";
 const NavBar = () => {
   const { user, signOutUser } = use(AuthContext);
 
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
-    const html = document.querySelector('html')
-     html.setAttribute("data-theme", theme)
-     localStorage.setItem("theme", theme)
-  }, [theme])
-
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const handleTheme = (checked) => {
-    setTheme(checked ? "dark": "light")
-  }
+    setTheme(checked ? "dark" : "light");
+  };
   return (
     <div className="navbar py-0 min-h-0 z-1 shadow-sm rounded-full glass-card max-w-7xl">
       <div className="navbar-start">
@@ -80,10 +79,10 @@ const NavBar = () => {
           </li>
           <li>
             <NavLink to={"/add-model"}>
-             <ImBoxAdd /> Add model
+              <ImBoxAdd /> Add model
             </NavLink>
           </li>
-{/* 
+          {/* 
           <li>
             <NavLink to={"/profile"}>
               <FaUser /> Profile
@@ -103,7 +102,10 @@ const NavBar = () => {
                 <img
                   alt="Tailwind CSS Navbar component"
                   referrerPolicy="no-referrer"
-                  src={user.photoURL || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"}
+                  src={
+                    user.photoURL ||
+                    "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  }
                 />
               </div>
             </div>
@@ -122,29 +124,20 @@ const NavBar = () => {
               </li>
 
               <li>
-                <Link to={"/my-models"}>
-                  My Models
-                </Link>
+                <Link to={"/my-models"}>My Models</Link>
               </li>
 
-              <li >
-                <Link to={"/my-downloads"}>
-                 My Downloads
-                </Link>
+              <li>
+                <Link to={"/my-downloads"}>My Downloads</Link>
               </li>
 
               <input
-           onChange={(e)=> handleTheme(e.target.checked)}
-           type="checkbox"
-           defaultChecked={localStorage.getItem('theme') === "dark"}
-           className="toggle"/>
-              
-              <li>
-                <a>
-                  {" "}
-                  <FaGear /> Settings
-                </a>
-              </li>
+                onChange={(e) => handleTheme(e.target.checked)}
+                type="checkbox"
+                defaultChecked={localStorage.getItem("theme") === "dark"}
+                className="toggle"
+              />
+
               <li>
                 <button
                   onClick={signOutUser}

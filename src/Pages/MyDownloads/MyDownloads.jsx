@@ -8,11 +8,14 @@ const MyDownloads = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://3d-model-server.vercel.app/my-downloads?email=${user.email}`, {
-      headers: {
-        authorization: `Bearer ${user.accessToken}`,
+    fetch(
+      `https://3d-models-hub-server-mu.vercel.app/my-downloads?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
       },
-    })
+    )
       .then((res) => res.json())
       .then((data) => {
         setModels(data);
